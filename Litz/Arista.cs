@@ -20,11 +20,14 @@ namespace Litz
         public Arista(Coordenada inicio, Coordenada final, int numCanales, int anguloInicial, int anguloFinal){
             this.inicio = inicio;
             this.final = final;
+            this.numCanales = numCanales;
 
 
         }
 
-        
+        private double[] CalcularOffset() {
+            
+        }
     }
     
 }
