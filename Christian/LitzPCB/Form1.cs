@@ -12,126 +12,18 @@ namespace Litz
 {
     public partial class Form1 : Form
     {
-
-        public class Point
-        {
-            public Point(double a, double b)
-            {
-                x = a;
-                y = b;
-            }
-
-            public static Point operator +(Point a, Point b)
-            {
-                return new Point(a.x + b.x, a.y + b.y);
-            }
-            public static Point operator -(Point a, Point b)
-            {
-                return new Point(a.x - b.x, a.y - b.y);
-            }
-            public static double distance(Point a, Point b)
-            {
-                return Math.sqrt((a.x-b.x)^2+(a.y-b.y)^2);
-            }
-
-            public override string ToString()
-            {
-                return ("(" + this.x.ToString() + " ; " + this.y.ToString() + ")");
-            }
-            public double x;
-            public double y;
-
-        }
-        public class Arista
-        {
-            public Point Inicio;
-            public Point Final;
-            public double[] offsetInicio;
-            public double[] offsetFinal;
-            public double largo;
-            public int nTrans;
-            public int nStrands;
-            public int angulo;
-        }
-        public List<Point>[][] transposeMatrix(int n)
-        {
-            List<Point>[][] salida = new List<Point>[2][];
-            salida[0] = new List<Point>[n];
-            salida[1] = new List<Point>[n];
-
-            for (int i = 0; i < n; i++)
-            {
-                salida[0][i] = new List<Point>();
-                salida[1][i] = new List<Point>();
-                int via = 2 * i % n;
-                int step = 2 * i / n < 1 ? 1 : -1;
-                int layer = 2 * i / n;
-                int y = 0;
-                for (int j = 0; j < 4 * n + 2; j++)
-                {
-
-                    salida[layer][i].Add(new Point(via, y));
-                    if (j % 2 != 0)
-                    {
-                        if (via == 4 && step == 1)
-                        {
-                            step = -1;
-                            //salida[layer][i].Add(new Point(via, j++));
-                            layer = 1;
-                        }
-                        else if (via == 0 && step == -1)
-                        {
-                            step = 1;
-                            //salida[layer][i].Add(new Point(via, j++));
-                            layer = 0;
-                        }
-                        else
-                        {
-                            //via += layer==0?1:-1;
-
-                            via += step;
-                            y++;
-                        }
-                    }
-                    else
-                    {
-                        y++;
-                    }
-
-                }
-            }
-
-            return salida;
-        }
-        public List<Point>[][] transposeList(Arista a)
-        {
-            List<Point>[][] salida = transposeMatrix(a.nStrands);
-            double stepLength = a.largo / (double)a.nTrans;
-            foreach (List<Point>[] i in salida)
-            {
-                foreach (List<Point> j in i)
-                {
-                    for (int k = 0; k < j.Count; k++)
-                    {
-                        j[k] = new Point(0, j[k].y * stepLength) + a.Inicio;
-                    }
-                }
-            }
-
-            return salida;
-        }
-
-
-        public Form1()
+        
+        
+                public Form1()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
             int n = 5;
-            List<Point>[][] salida = transposeMatrix(n);
+            List<Coordenada>[][] salida = TransposeMatrix.create(n);
             Color[] colores = new Color[n];
             colores[0] = Color.Blue;
             colores[1] = Color.Red;
@@ -145,20 +37,20 @@ namespace Litz
             {
                 chart1.Series.Add(i.ToString());
             }
-            foreach (List<Point>[] i in salida)
+            foreach (List<Coordenada>[] i in salida)
             {
                 int seriesIndex = 0;
                 
-                foreach (List<Point> j in i)
+                foreach (List<Coordenada> j in i)
                 {
                     chart1.Series[seriesIndex].MarkerColor = colores[rnd.Next(0,4)];
                     chart1.Series[seriesIndex].BorderWidth = 2;
-                    chart1.Series[seriesIndex].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Funnel;
-
+                    chart1.Series[seriesIndex].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+                    
 
                     for (int k = 0; k < j.Count; k++)
                     {
-                        j[k] = new Point(j[k].x, j[k].y * stepLength) + new Point(10, 3);
+                        j[k] = new Coordenada(j[k].x, j[k].y * stepLength) + new Coordenada(10, 3);
                         chart1.Series[seriesIndex].Points.AddXY(j[k].x, j[k].y);
                         Console.WriteLine(j[k].ToString());
                     }

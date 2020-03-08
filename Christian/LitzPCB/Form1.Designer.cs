@@ -1,4 +1,4 @@
-﻿namespace LitzPCB
+﻿namespace Litz
 {
     partial class Form1
     {
