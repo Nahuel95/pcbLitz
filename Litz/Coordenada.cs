@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Litz
 {
-    class Coordenada
+    public class Coordenada
     {
         public double x;
         public double y;
