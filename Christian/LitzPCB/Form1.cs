@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LitzPCB
+namespace Litz
 {
     public partial class Form1 : Form
     {
@@ -28,6 +28,10 @@ namespace LitzPCB
             public static Point operator -(Point a, Point b)
             {
                 return new Point(a.x - b.x, a.y - b.y);
+            }
+            public static double distance(Point a, Point b)
+            {
+                return Math.sqrt((a.x-b.x)^2+(a.y-b.y)^2);
             }
 
             public override string ToString()
