@@ -1,0 +1,9 @@
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.exe.config
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.csprojResolveAssemblyReference.cache
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.Form1.resources
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.Properties.Resources.resources
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.csproj.GenerateResource.Cache
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.exe
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.pdb
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.exe
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.pdb
