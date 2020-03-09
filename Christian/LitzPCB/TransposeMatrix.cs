@@ -58,21 +58,91 @@ namespace Litz
 
             return salida;
         }
+
+        static List<Coordenada>[][] deepCopyOfTremendouslyIntrincatedArray(List<Coordenada>[][] target)
+        {
+            List<Coordenada>[][] salida = new List<Coordenada>[target.Length][];
+            for(int i = 0; i < salida.Length; i++)
+            {
+                salida[i] = new List<Coordenada>[target[0].Length];
+                for(int j = 0; j < salida[i].Length; j++)
+                {
+                    salida[i][j] = new List<Coordenada>();
+                    foreach(Coordenada m in target[i][j])
+                    {
+                        salida[i][j].Add(new Coordenada(m.x, m.y));
+                    }
+                }
+            }
+
+            return salida;
+            
+        }
+
+        static List<Coordenada>[][] multiplicarList(List<Coordenada>[][] a, int nVeces, int nCanales)
+        {
+
+            List<Coordenada>[][] salida = deepCopyOfTremendouslyIntrincatedArray(a);
+
+
+
+            foreach (List<Coordenada>[] i in salida)
+            {
+                for (int j = 0; j < i.Length; j++)
+                {
+                    List<Coordenada> temp = new List<Coordenada>();
+                    for (int index = 1; index < nVeces; index++)
+                    {
+                        foreach (Coordenada coord in i[j])
+                        {
+                            temp.Add(new Coordenada(coord.x, coord.y + 4 * nCanales * (index)));
+                        }
+                    }
+                    //for (int l = 0; l < temp.Count; l++)
+                    //{
+                    //    Console.WriteLine(index);
+                    //    temp[l].y +=  4*nCanales* (index);
+                    //}
+                    i[j].AddRange(temp);
+                    temp.Clear();
+                }
+            }
+            
+            //foreach (List<Coordenada>[] i in salida)
+            //{
+            //    foreach (List<Coordenada> j in i)
+            //    {
+            //        int y = 0;
+            //        for (int k = 0; k < j.Count; k++)
+            //        {
+            //            j[k].y = y;
+            //            y++;
+            //        }
+            //    }
+            //}
+            return salida;
+        }
+
         public static List<Coordenada>[][] createList(Arista a)
         {
             List<Coordenada>[][] salida = create(a.numCanales);
-            double stepLength = a.longitud / (double)a.numTrans;
+
+            salida = multiplicarList(salida, a.numTrans,a.numCanales);
+
+            double stepLength = a.longitud / (double)salida[0][0].Count-1;
+            double anchoCanal = a.ancho / ((double)a.numCanales-1);
             foreach (List<Coordenada>[] i in salida)
             {
                 foreach (List<Coordenada> j in i)
                 {
                     for (int k = 0; k < j.Count; k++)
                     {
-                        j[k] = new Coordenada(0, j[k].y * stepLength) + a.inicio;
+                        j[k] = new Coordenada(j[k].x * anchoCanal, j[k].y * stepLength) + a.inicio;
+                        //j[k] = new Coordenada(j[k].x, j[k].y) + a.inicio;
+                        j[k].rotate(a.angulo);
                     }
                 }
             }
-
             return salida;
         }
     }

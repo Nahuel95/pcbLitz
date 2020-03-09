@@ -31,5 +31,11 @@ namespace Litz
         {
             return Math.Sqrt(Math.Pow(a.x-b.x,2+Math.Pow(a.y-b.y,2)));
         }
+        public void rotate(double angulo)
+        {
+            double angle = angulo * (2 * Math.PI)/360.0;
+            this.x = this.x * Math.Cos(angle) - this.y * Math.Sin(angle);
+            this.y = this.x * Math.Sin(angle) + this.y * Math.Cos(angle);
+        }
     }
 }

@@ -14,15 +14,18 @@ namespace Litz
         public double[] offsetInicio;
         public double[] offsetFinal;
         public double longitud;
+        public double ancho;
         public int numTrans;
         public int angulo; //De 0 a 7, angulo * 45 = medida real.
 
-        public Arista(Coordenada inicio, Coordenada final, int numCanales){
+        public Arista(Coordenada inicio, Coordenada final, int numCanales, double anchoPista, int numTransposiciones){
             this.inicio = inicio;
             this.final = final;
             this.numCanales = numCanales;
             this.longitud = Coordenada.distancia(inicio,final);
-            this.angulo = (int)Math.Floor(Math.Atan2(final.y-inicio.y, final.x-inicio.x)/45.0);
+            this.angulo = (int)Math.Floor(Math.Atan2(final.y-inicio.y, final.x-inicio.x)*45.0/(Math.PI/2));
+            this.ancho = anchoPista;
+            this.numTrans = numTransposiciones;
         }
 
         public double[] CalcularOffset() {
