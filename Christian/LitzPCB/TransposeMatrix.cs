@@ -139,10 +139,23 @@ namespace Litz
                     {
                         j[k] = new Coordenada(j[k].x * anchoCanal, j[k].y * stepLength) + a.inicio;
                         //j[k] = new Coordenada(j[k].x, j[k].y) + a.inicio;
-                        j[k].rotate(a.angulo);
+                        
                     }
                 }
             }
+            int offsetIndex = 0;
+            foreach(List<Coordenada> i in salida[0])
+            {
+                i[0].y += a.offsetInicio[offsetIndex];
+                offsetIndex++;
+            }
+            offsetIndex = 0;
+            foreach (List<Coordenada> i in salida[1])
+            {
+                i[i.Count-1].y += a.offsetFinal[offsetIndex];
+                offsetIndex++;
+            }
+
             return salida;
         }
     }

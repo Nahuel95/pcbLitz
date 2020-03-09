@@ -18,7 +18,7 @@ namespace Litz
         public int numTrans;
         public int angulo; //De 0 a 7, angulo * 45 = medida real.
 
-        public Arista(Coordenada inicio, Coordenada final, int numCanales, double anchoPista, int numTransposiciones){
+        public Arista(Coordenada inicio, Coordenada final, int numCanales, double anchoPista, int numTransposiciones, double[] offsetinicio, double[] offsetfinal){
             this.inicio = inicio;
             this.final = final;
             this.numCanales = numCanales;
@@ -26,6 +26,8 @@ namespace Litz
             this.angulo = (int)Math.Floor(Math.Atan2(final.y-inicio.y, final.x-inicio.x)*45.0/(Math.PI/2));
             this.ancho = anchoPista;
             this.numTrans = numTransposiciones;
+            this.offsetInicio = offsetinicio;
+            this.offsetFinal = offsetfinal;
         }
 
         public double[] CalcularOffset() {

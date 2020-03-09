@@ -25,7 +25,7 @@ namespace Litz
             int n = 5;
             Coordenada inicio = new Coordenada(10.0, 3.0);
             Coordenada final = new Coordenada(20.0, 3.0);
-            List<Coordenada>[][] salida = TransposeMatrix.createList(new Arista(inicio,final,5,1.0,1));
+            List<Coordenada>[][] salida = TransposeMatrix.createList(new Arista(inicio,final,5,1.0,1,new double[] { 0, 0, 0, 0, 0 },new double[] { -0.2, -0.1, 0, 0.1, 0.2 }));
             Color[] colores = new Color[n];
             colores[0] = Color.Blue;
             colores[1] = Color.Red;
