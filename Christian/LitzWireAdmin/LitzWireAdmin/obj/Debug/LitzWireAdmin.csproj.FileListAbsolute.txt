@@ -1,0 +1,12 @@
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\LitzWireAdmin.exe.config
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\LitzWireAdmin.exe
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\LitzWireAdmin.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.csprojResolveAssemblyReference.cache
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.Form1.resources
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.Properties.Resources.resources
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.csproj.GenerateResource.Cache
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.exe
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\obj\Debug\LitzWireAdmin.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\HtmlAgilityPack.dll
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\HtmlAgilityPack.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzWireAdmin\LitzWireAdmin\bin\Debug\HtmlAgilityPack.xml
