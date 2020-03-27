@@ -1,0 +1,7 @@
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\obj\Debug\Litz.csproj.CoreCompileInputs.cache
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\bin\Debug\Litz.exe.config
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\bin\Debug\Litz.exe
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\bin\Debug\Litz.pdb
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\obj\Debug\Litz.exe
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\obj\Debug\Litz.pdb
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\Litz\obj\Debug\Litz.csprojAssemblyReference.cache
