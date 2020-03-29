@@ -20,15 +20,18 @@ namespace Litz
                 salida[1][i] = new List<Coordenada>();
                 int via = 2 * i % n;
                 int step = 2 * i / n < 1 ? 1 : -1;
+
+                // layer: top=0 bottom=1
                 int layer = 2 * i / n;
                 int y = 0;
+                
                 for (int j = 0; j < 4 * n + 2; j++)
                 {
 
                     salida[layer][i].Add(new Coordenada(via, y));
                     if (j % 2 != 0)
                     {
-                        if (via == 4 && step == 1)
+                        if (via == n-1 && layer == 0)
                         {
                             step = -1;
                             //salida[layer][i].Add(new Coordenada(via, j++));
@@ -39,18 +42,26 @@ namespace Litz
                             step = 1;
                             //salida[layer][i].Add(new Coordenada(via, j++));
                             layer = 0;
+
+                            
                         }
                         else
                         {
                             //via += layer==0?1:-1;
 
                             via += step;
-                            y++;
+                            y+=2;
                         }
                     }
                     else
                     {
-                        y++;
+                        if((via == n - 1 && j!= 4 * n) || (via == 0 && y != 0)) {
+                            y += 5;
+                        }
+                        else
+                        {
+                            y += 4;
+                        }
                     }
 
                 }
@@ -95,7 +106,7 @@ namespace Litz
                     {
                         foreach (Coordenada coord in i[j])
                         {
-                            temp.Add(new Coordenada(coord.x, coord.y + 4 * nCanales * (index)));
+                            temp.Add(new Coordenada(coord.x, coord.y + 4 * nCanales * (index)-2));
                         }
                     }
                     //for (int l = 0; l < temp.Count; l++)
@@ -128,33 +139,35 @@ namespace Litz
             List<Coordenada>[][] salida = create(a.numCanales);
 
             salida = multiplicarList(salida, a.numTrans,a.numCanales);
-
-            double stepLength = a.longitud / (double)salida[0][0].Count-1;
-            double anchoCanal = a.ancho / ((double)a.numCanales-1);
+            double anchoCanal = a.ancho / ((double)a.numCanales - 1);
+            double stepLength = a.longitud / 64.0;
+            //double stepLength = 1.0;
+            //double anchoCanal = 1.0;
             foreach (List<Coordenada>[] i in salida)
             {
                 foreach (List<Coordenada> j in i)
                 {
                     for (int k = 0; k < j.Count; k++)
                     {
-                        j[k] = new Coordenada(j[k].x * anchoCanal, j[k].y * stepLength) + a.inicio;
+                        j[k] = new Coordenada((j[k].x-(a.numCanales-1)/2) * anchoCanal, j[k].y * stepLength) + a.inicio;
+                        j[k].rotate(a.angulo);
                         //j[k] = new Coordenada(j[k].x, j[k].y) + a.inicio;
                         
                     }
                 }
             }
-            int offsetIndex = 0;
-            foreach(List<Coordenada> i in salida[0])
-            {
-                i[0].y += a.offsetInicio[offsetIndex];
-                offsetIndex++;
-            }
-            offsetIndex = 0;
-            foreach (List<Coordenada> i in salida[1])
-            {
-                i[i.Count-1].y += a.offsetFinal[offsetIndex];
-                offsetIndex++;
-            }
+            //int offsetIndex = 0;
+            //foreach (List<Coordenada> i in salida[0])
+            //{
+            //    i[0].y += a.offsetInicio[offsetIndex];
+            //    offsetIndex++;
+            //}
+            //offsetIndex = 0;
+            //foreach (List<Coordenada> i in salida[1])
+            //{
+            //    i[i.Count - 1].y += a.offsetFinal[offsetIndex];
+            //    offsetIndex++;
+            //}
 
             return salida;
         }
