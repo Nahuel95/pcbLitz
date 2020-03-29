@@ -1,0 +1,18 @@
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.exe.config
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.csprojResolveAssemblyReference.cache
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.Form1.resources
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.Properties.Resources.resources
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.csproj.GenerateResource.Cache
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.exe
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\bin\Debug\LitzPCB.pdb
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.exe
+d:\christian\documents\visual studio 2015\Projects\LitzPCB\LitzPCB\obj\Debug\LitzPCB.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\bin\Debug\LitzPCB.exe.config
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\LitzPCB.exe
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\LitzPCB.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\bin\Debug\LitzPCB.exe
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\bin\Debug\LitzPCB.pdb
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\LitzPCB.csprojResolveAssemblyReference.cache
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\LitzPCB.Properties.Resources.resources
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\LitzPCB.csproj.GenerateResource.Cache
+D:\Christian\Documents\GitHub\pcbLitz\Christian\LitzPCB\obj\Debug\Litz.Form1.resources
