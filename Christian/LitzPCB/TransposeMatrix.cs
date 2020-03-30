@@ -81,7 +81,7 @@ namespace Litz
                     salida[i][j] = new List<Coordenada>();
                     foreach(Coordenada m in target[i][j])
                     {
-                        salida[i][j].Add(new Coordenada(m.x, m.y));
+                        salida[i][j].Add(new Coordenada(m.getX(), m.getY()));
                     }
                 }
             }
@@ -106,7 +106,7 @@ namespace Litz
                     {
                         foreach (Coordenada coord in i[j])
                         {
-                            temp.Add(new Coordenada(coord.x, coord.y + 4 * nCanales * (index)-2));
+                            temp.Add(new Coordenada(coord.getX(), coord.getY() + 4 * nCanales * (index)-2));
                         }
                     }
                     //for (int l = 0; l < temp.Count; l++)
@@ -136,39 +136,74 @@ namespace Litz
 
         public static List<Coordenada>[][] createList(Arista a)
         {
-            List<Coordenada>[][] salida = create(a.numCanales);
+            List<Coordenada>[][] salida = create(a.getNumCanales());
 
-            salida = multiplicarList(salida, a.numTrans,a.numCanales);
-            double anchoCanal = a.ancho / ((double)a.numCanales - 1);
-            double stepLength = a.longitud / 64.0;
+            salida = multiplicarList(salida, a.getNumTransp(),a.getNumCanales());
+            double anchoCanal = a.getAncho() / ((double)a.getNumCanales() - 1);
+            double stepLength = a.getLongitud() / 64.0;
             //double stepLength = 1.0;
             //double anchoCanal = 1.0;
             foreach (List<Coordenada>[] i in salida)
             {
+
                 foreach (List<Coordenada> j in i)
                 {
                     for (int k = 0; k < j.Count; k++)
                     {
-                        j[k] = new Coordenada((j[k].x-(a.numCanales-1)/2) * anchoCanal, j[k].y * stepLength) + a.inicio;
-                        j[k].rotate(a.angulo);
-                        //j[k] = new Coordenada(j[k].x, j[k].y) + a.inicio;
+                        j[k] = new Coordenada((j[k].getX()-(a.getNumCanales()-1)/2) * anchoCanal, j[k].getY() * stepLength);
                         
+                        //Console.WriteLine(j[k].ToString());
+                        //j[k].rotate((a.getAngulo()-2)*Math.PI/4);
+                        //Console.WriteLine(j[k].ToString());
+                        //j[k] += a.getInicio();
+
                     }
                 }
             }
-            //int offsetIndex = 0;
-            //foreach (List<Coordenada> i in salida[0])
-            //{
-            //    i[0].y += a.offsetInicio[offsetIndex];
-            //    offsetIndex++;
-            //}
-            //offsetIndex = 0;
-            //foreach (List<Coordenada> i in salida[1])
-            //{
-            //    i[i.Count - 1].y += a.offsetFinal[offsetIndex];
-            //    offsetIndex++;
-            //}
+            int offsetIndex = 0;
+            foreach (List<Coordenada> i in salida[0])
+            {
+                int sel = 2 * offsetIndex % a.getNumCanales();
+                //Console.WriteLine(sel);
+                if (sel % 2 == 0) {
+                    //Console.WriteLine(a.getOffsetInicio()[sel]);
+                    i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
+                    //Console.WriteLine(a.getOffsetFinal()[sel]);
+                    i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
+                }
+                offsetIndex++;
+            }
+            offsetIndex = 0;
+            foreach (List<Coordenada> i in salida[1])
+            {
+                int sel = 2 * offsetIndex % a.getNumCanales();
+                //Console.WriteLine(sel);
+                if (sel % 2 == 1)
+                {
+                    //Console.WriteLine(a.getOffsetInicio()[sel]);
+                    i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
+                    //Console.WriteLine(a.getOffsetFinal()[sel]);
+                    i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
+                }
+                offsetIndex++;
+            }
 
+            foreach (List<Coordenada>[] i in salida)
+            {
+
+                foreach (List<Coordenada> j in i)
+                {
+                    for (int k = 0; k < j.Count; k++)
+                    {
+
+                        //Console.WriteLine(j[k].ToString());
+                        j[k].rotate((a.getAngulo() - 2) * Math.PI / 4);
+                        //Console.WriteLine(j[k].ToString());
+                        j[k] += a.getInicio();
+
+                    }
+                }
+            }
             return salida;
         }
     }

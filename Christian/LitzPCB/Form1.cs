@@ -14,7 +14,7 @@ namespace Litz
     {
         
         
-                public Form1()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -24,10 +24,13 @@ namespace Litz
             
             int n = 5;
             Coordenada inicio = new Coordenada(0.0, 0.0);
-            Coordenada final = new Coordenada(0.0, 30.0);
+            Coordenada final = new Coordenada(30.0, 30.0);
             double width = 2.0;
-            Arista a = new Arista(inicio, final, 5, width, 1, new double[] { 0, 0, 0, 0, 0 }, new double[] { 0, 0, 0, 0, 0 });
-            Console.WriteLine("{0};{1}", a.longitud, Math.Atan2(final.y - inicio.y, final.x - inicio.x));
+            Arista a = new Arista(inicio, final, 5, 0, width);
+            a.setOffsetFinal(new double[] { 1, 0.5, 0, -0.5, -1 });
+            a.setOffsetInicio(new double[] { -1, -0.5, 0, 0.5, 1 });
+            Console.WriteLine(a.getAngulo());
+            Console.WriteLine("{0};{1}", a.getLongitud(), Math.Atan2(final.getY() - inicio.getY(), final.getX() - inicio.getX()));
 
             List<Coordenada>[][] salida = TransposeMatrix.createList(a);
             
@@ -65,7 +68,7 @@ namespace Litz
                 for(int p = 0; p < i.Length; p++)
                 {
                     i[p].AddRange(salida[m + 1][p]);
-                    i[p].Sort(new CoordCompare());
+                    //i[p].Sort(new Coordenada.CoordCompare());
                 }
                 
                 foreach (List<Coordenada> j in i)
@@ -78,11 +81,11 @@ namespace Litz
 
                     for (int k = 0; k < j.Count; k++)
                     {
-                        //int mostrar = 2;
-                        //if (seriesIndex == mostrar || seriesIndex == mostrar+5)
+                        //int mostrar = 0;
+                        //if (seriesIndex == mostrar || seriesIndex == mostrar + 5)
                         //{
-                            chart1.Series[seriesIndex].Points.AddXY(j[k].x, j[k].y);
-                            Console.WriteLine(j[k].ToString());
+                            chart1.Series[seriesIndex].Points.AddXY(j[k].getX(), j[k].getY());
+                            //Console.WriteLine(j[k].ToString());
                         //}
                     }
 

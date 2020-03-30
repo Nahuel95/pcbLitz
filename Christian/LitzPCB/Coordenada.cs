@@ -8,12 +8,29 @@ namespace Litz
 {
     public class Coordenada
     {
-        public double x;
-        public double y;
+        private double x;
+        private double y;
         public Coordenada(double x, double y) {
             this.x = x;
             this.y = y;
         }
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public void setX(double x) {
+            this.x = x;
+        }
+
+        public void setY(double y){ 
+            this.y = y;
+        }
+
         public static Coordenada operator +(Coordenada a, Coordenada b)
         {
             return new Coordenada(a.x + b.x, a.y + b.y);
@@ -23,38 +40,41 @@ namespace Litz
             return new Coordenada(a.x - b.x, a.y - b.y);
         }
 
+        public void rotate(double angle)
+        {
+            
+            double tempX = this.x * Math.Cos(angle) - this.y * Math.Sin(angle);
+            double tempY = this.x * Math.Sin(angle) + this.y * Math.Cos(angle);
+
+            this.x = tempX;
+            this.y = tempY;
+        }
+
         public override string ToString()
         {
             return ("(" + this.x.ToString() + " ; " + this.y.ToString() + ")");
         }
         public static double distancia(Coordenada a, Coordenada b)
         {
-            return Math.Sqrt(Math.Pow(a.x-b.x,2)+Math.Pow(a.y-b.y,2));
+            return Math.Sqrt(Math.Pow((a.x-b.x),2) + Math.Pow((a.y-b.y),2));
         }
-        public void rotate(double angulo)
-        {
-            double angle = (angulo*45.0) * (Math.PI)/180.0;
-            double newX = this.x * Math.Cos(angle) - this.y * Math.Sin(angle);
-            double newY = this.x * Math.Sin(angle) + this.y * Math.Cos(angle);
 
-            this.x = newX;
-            this.y = newY;
-        }
-    }
-
-    public class CoordCompare: IComparer<Coordenada>
-    {
-        public int Compare(Coordenada a, Coordenada b)
+        public class CoordCompare : IComparer<Coordenada>
         {
-            if(a.y > b.y)
+            public int Compare(Coordenada a, Coordenada b)
             {
-                return 1;
-            }else if (a.y < b.y)
-            {
-                return -1;
-            }else
-            {
-                return 0;
+                if (a.y > b.y)
+                {
+                    return 1;
+                }
+                else if (a.y < b.y)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }
