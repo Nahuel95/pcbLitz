@@ -77,5 +77,10 @@ namespace LitzGrafica
                 }
             }
         }
+
+        public void OrdenGerber(System.IO.FileStream archivo)
+        {
+            ;
+        }
     }
 }

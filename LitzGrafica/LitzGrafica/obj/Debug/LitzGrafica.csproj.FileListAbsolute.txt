@@ -18,3 +18,12 @@ C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\L
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csproj.CoreCompileInputs.cache
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.exe
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.pdb
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.exe.config
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.exe
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.pdb
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.exe
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.pdb
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csprojResolveAssemblyReference.cache
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Main.resources
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Properties.Resources.resources
+D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csproj.GenerateResource.Cache

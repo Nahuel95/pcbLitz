@@ -19,16 +19,34 @@ namespace LitzGrafica
             InitializeComponent();
         }
 
+        private void chart1_Click(object sender, EventArgs e)
+        {
+            CambiarEscala cambiar = new CambiarEscala(sender);
+            if (cambiar.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
+
         private void TransposeButton_Click(object sender, EventArgs e)
         {
-            string path = Path.Combine("C:","Gerber_TopLayer.gtl");
+
+            OpenFileDialog file = new OpenFileDialog();
+            string path = "D:\\Christian\\Desktop\\Comun_Top.GTL";
+            //if (file.ShowDialog() == DialogResult.OK)
+            //{
+            //    path = file.FileName;
+            //}
+
+            //string path = Path.Combine("C:","Gerber_TopLayer.gtl");
             double size = Traductor.leerHerramienta(path);
             List<Coordenada> coords = Traductor.GerberACoordenadas(path);
             List<Arista> aristas = Traductor.CalcularAristas(coords, 5);
 
             foreach (Arista a in aristas)
             {
-                a.setAncho(size);
+                a.setAncho(size*1000);
+                //a.setAncho(10);
             }
 
             for (int i = 0; i < aristas.Count - 1; i++)
@@ -44,22 +62,50 @@ namespace LitzGrafica
                 List<Coordenada>[][] listCoord = TransposeMatrix.createList(a);
                 pcb.Add(listCoord);
             }
+            Random rnd = new Random();
+            int seriesIndex = 0;
+
+            FileStream fs = new FileStream("asd", FileMode.CreateNew);
+            
             foreach (List<Coordenada>[][] i in pcb)
             {
                 foreach (List<Coordenada>[] j in i)
                 {
                     foreach (List<Coordenada> k in j)
                     {
-                        foreach (Coordenada m in k)
+                        chart1.Series.Add(seriesIndex.ToString());
+                        chart1.Series[seriesIndex].MarkerColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                        chart1.Series[seriesIndex].BorderWidth = 10;
+                        chart1.Series[seriesIndex].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+
+
+                        for (int m = 0; m < k.Count; m++)
                         {
-                            Console.WriteLine(m.ToString());
+                            if (true)
+                            {
+                                int mostrar = 15;
+                                if (seriesIndex < mostrar)
+                                {
+                                    chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
+                                    Console.WriteLine(k[m].ToString());
+                                    k[m].OrdenGerber(fs);
+                                }
+                            }else
+                            {
+                                chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
+                                Console.WriteLine(k[m].ToString());
+                            }
                         }
-                        Console.WriteLine("---");
+
+                        seriesIndex++;
                     }
-                    Console.WriteLine("-------------");
+
                 }
-                Console.WriteLine("***************************");
+                Console.WriteLine("-------------");
             }
+            Console.WriteLine("***************************");
         }
+        
     }
 }
+
