@@ -40,11 +40,14 @@ namespace LitzGrafica
             return new Coordenada(a.x - b.x, a.y - b.y);
         }
 
-        public void rotate(double angulo)
+        public void rotate(double angle)
         {
-            double angle = angulo * (2 * Math.PI) / 360.0;
-            this.x = this.x * Math.Cos(angle) - this.y * Math.Sin(angle);
-            this.y = this.x * Math.Sin(angle) + this.y * Math.Cos(angle);
+            
+            double tempX = this.x * Math.Cos(angle) - this.y * Math.Sin(angle);
+            double tempY = this.x * Math.Sin(angle) + this.y * Math.Cos(angle);
+
+            this.x = tempX;
+            this.y = tempY;
         }
 
         public override string ToString()

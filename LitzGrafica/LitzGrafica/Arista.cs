@@ -81,10 +81,17 @@ namespace LitzGrafica
         public void setOffsetInicio(double[] offset) {
             offsetInicio = offset;
         }
-
+        public double[] getOffsetInicio()
+        {
+            return offsetInicio;
+        }
         public void setOffsetFinal(double[] offset)
         {
             offsetFinal = offset;
+        }
+        public double[] getOffsetFinal()
+        {
+            return offsetFinal;
         }
         public static double gradosARadianes(double grados) {
             return grados * (Math.PI / 180);
