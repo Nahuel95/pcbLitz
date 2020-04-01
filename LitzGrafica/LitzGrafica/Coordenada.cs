@@ -10,9 +10,22 @@ namespace LitzGrafica
     {
         private double x;
         private double y;
-        public Coordenada(double x, double y) {
+        private bool Obturador;
+
+        public Coordenada(double x, double y, bool obturador) {
             this.x = x;
             this.y = y;
+            this.Obturador = obturador;
+        }
+
+        public bool getObturador()
+        {
+            return Obturador;
+        }
+
+        public void setHerramientaAbajo(bool abierto)
+        {
+            Obturador = abierto;
         }
 
         public double getX() {
@@ -33,11 +46,11 @@ namespace LitzGrafica
 
         public static Coordenada operator +(Coordenada a, Coordenada b)
         {
-            return new Coordenada(a.x + b.x, a.y + b.y);
+            return new Coordenada(a.x + b.x, a.y + b.y, a.getObturador()||b.getObturador());
         }
         public static Coordenada operator -(Coordenada a, Coordenada b)
         {
-            return new Coordenada(a.x - b.x, a.y - b.y);
+            return new Coordenada(a.x - b.x, a.y - b.y, a.getObturador() || b.getObturador());
         }
 
         public void rotate(double angle)
@@ -78,9 +91,9 @@ namespace LitzGrafica
             }
         }
 
-        public void OrdenGerber(System.IO.FileStream archivo)
+        public void OrdenGerber(System.IO.StreamWriter archivo)
         {
-            ;
+            archivo.WriteLine("G01X{0}Y{1}D0{2}*", this.x, this.y, Obturador ? 2 : 1);
         }
     }
 }

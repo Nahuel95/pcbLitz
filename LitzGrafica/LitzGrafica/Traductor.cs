@@ -78,7 +78,7 @@ namespace LitzGrafica
             double x = Double.Parse(parts[1]);
             double y = Double.Parse(parts[2]);
             //Ver errores de precision
-            return new Coordenada(x, y);
+            return new Coordenada(x, y,false);
 
         }
     }

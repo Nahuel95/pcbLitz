@@ -24,11 +24,12 @@ namespace LitzGrafica
                 // layer: top=0 bottom=1
                 int layer = 2 * i / n;
                 int y = 0;
-                
+                bool arriba = false;
                 for (int j = 0; j < 4 * n + 2; j++)
                 {
 
-                    salida[layer][i].Add(new Coordenada(via, y));
+                    salida[layer][i].Add(new Coordenada(via, y, arriba));
+                    arriba = false;
                     if (j % 2 != 0)
                     {
                         if (via == n-1 && layer == 0)
@@ -36,12 +37,14 @@ namespace LitzGrafica
                             step = -1;
                             //salida[layer][i].Add(new Coordenada(via, j++));
                             layer = 1;
+                            arriba = true;
                         }
                         else if (via == 0 && step == -1)
                         {
                             step = 1;
                             //salida[layer][i].Add(new Coordenada(via, j++));
                             layer = 0;
+                            arriba = true;
 
                             
                         }
@@ -81,7 +84,7 @@ namespace LitzGrafica
                     salida[i][j] = new List<Coordenada>();
                     foreach(Coordenada m in target[i][j])
                     {
-                        salida[i][j].Add(new Coordenada(m.getX(), m.getY()));
+                        salida[i][j].Add(new Coordenada(m.getX(), m.getY(),m.getObturador()));
                     }
                 }
             }
@@ -106,7 +109,7 @@ namespace LitzGrafica
                     {
                         foreach (Coordenada coord in i[j])
                         {
-                            temp.Add(new Coordenada(coord.getX(), coord.getY() + 4 * nCanales * (index)-2));
+                            temp.Add(new Coordenada(coord.getX(), coord.getY() + 4 * nCanales * (index) - 2, coord.getObturador()));
                         }
                     }
                     //for (int l = 0; l < temp.Count; l++)
@@ -150,7 +153,7 @@ namespace LitzGrafica
                 {
                     for (int k = 0; k < j.Count; k++)
                     {
-                        j[k] = new Coordenada((j[k].getX()-(a.getNumCanales()-1)/2) * anchoCanal, j[k].getY() * stepLength);
+                        j[k] = new Coordenada((j[k].getX() - (a.getNumCanales() - 1) / 2) * anchoCanal, j[k].getY() * stepLength, j[k].getObturador());
                         
                         //Console.WriteLine(j[k].ToString());
                         //j[k].rotate((a.getAngulo()-2)*Math.PI/4);

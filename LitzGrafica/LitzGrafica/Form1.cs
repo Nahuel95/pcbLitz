@@ -65,12 +65,27 @@ namespace LitzGrafica
             Random rnd = new Random();
             int seriesIndex = 0;
 
-            FileStream fs = new FileStream("asd", FileMode.CreateNew);
-            
+            FileStream fsTop = new FileStream(Path.GetDirectoryName(path)+"\\LitzResult\\"+Path.GetFileNameWithoutExtension(path)+"_litz.gtl", FileMode.CreateNew);
+            System.IO.StreamWriter swTop = new StreamWriter(fsTop);
+            FileStream fsBot = new FileStream(Path.GetDirectoryName(path) + "\\LitzResult\\" + Path.GetFileNameWithoutExtension(path) + "_litz.gbl", FileMode.CreateNew);
+            System.IO.StreamWriter swBot = new StreamWriter(fsTop);
+
+            int capa = 0;
             foreach (List<Coordenada>[][] i in pcb)
             {
                 foreach (List<Coordenada>[] j in i)
                 {
+                    StreamWriter actual;
+                    if(capa == 0)
+                    {
+                        actual = swTop;
+                    }
+                    else
+                    {
+                        actual = swBot;
+                    }
+
+                    actual.WriteLine("G04 Layer: TopLayer *\nG04 LitzPCB por CBuzzio y NFilippa, {0}-{1} *\nG04 Scale: 100 percent, Rotated: No, Reflected: No *G04 Dimensiones en micrometros *G04 leading zeros omitted, absolute positions, 3 integer and 3 decimal *\n% FSLAX33Y33 *%\n% MOMM *%\nG90 *\nG71D02 *", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
                     foreach (List<Coordenada> k in j)
                     {
                         chart1.Series.Add(seriesIndex.ToString());
@@ -88,22 +103,26 @@ namespace LitzGrafica
                                 {
                                     chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
                                     Console.WriteLine(k[m].ToString());
-                                    k[m].OrdenGerber(fs);
+                                    k[m].OrdenGerber(actual);
                                 }
                             }else
                             {
                                 chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
                                 Console.WriteLine(k[m].ToString());
+                                k[m].OrdenGerber(actual);
                             }
                         }
 
                         seriesIndex++;
                     }
-
+                    capa = 1;
                 }
-                Console.WriteLine("-------------");
             }
-            Console.WriteLine("***************************");
+
+            swTop.Close();
+            swBot.Close();
+            fsTop.Close();
+            fsBot.Close();
         }
         
     }
