@@ -45,10 +45,18 @@ namespace LitzGrafica
 
         }
 
+        public void setInicio(Coordenada inicio)
+        {
+            this.inicio = inicio;
+        }
         public Coordenada getInicio() {
             return this.inicio;
         }
 
+        public void setFinal(Coordenada final)
+        {
+            this.final = final;
+        }
         public Coordenada getFinal() {
             return this.final;
         }
@@ -60,6 +68,11 @@ namespace LitzGrafica
         public int getNumCanales()
         {
             return this.numCanales;
+        }
+
+        public void setLongitud(double longitud)
+        {
+            this.longitud = longitud;
         }
 
         public double getLongitud() {
@@ -119,13 +132,23 @@ namespace LitzGrafica
             return ret;
         }
 
-        /*private Coordenada moverPuntoConAngulo(Coordenada punto, int direcc, double distancia){
+        public static Coordenada moverPuntoConAngulo(Coordenada punto, int direcc, double distancia){
             double nuevaX;
             double nuevaY;
             nuevaX = punto.getX() + distancia * Math.Cos(gradosARadianes(direcc*45));
             nuevaY = punto.getY() + distancia * Math.Sin(gradosARadianes(direcc*45));
-            return new Coordenada(nuevaX, nuevaY);
-        }*/
+            return new Coordenada(nuevaX, nuevaY, punto.getObturador());
+        }
+
+        public static int anguloContrario(int ang){
+            if (ang < 4)
+            {
+                return ang + 4;
+            }
+            else {
+                return ang - 4;
+            }
+        }
             
         public static double[] CalcularOffsets(int angulo, int canales, double ancho){ //angulo <- {1, 2, 6, 7}
             double[] ret = new double[canales];

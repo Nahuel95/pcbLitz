@@ -32,7 +32,7 @@ namespace LitzGrafica
         {
 
             OpenFileDialog file = new OpenFileDialog();
-            string path = "D:\\Christian\\Desktop\\Comun_Top.GTL";
+            string path = "C:\\Gerber_TopLayer.GTL";
             //if (file.ShowDialog() == DialogResult.OK)
             //{
             //    path = file.FileName;
@@ -55,6 +55,26 @@ namespace LitzGrafica
                 aristas[i].setOffsetFinal(Arista.CalcularOffsets(angulo, aristas[i].getNumCanales(), aristas[i].getAncho()));
                 aristas[i + 1].setOffsetInicio(Arista.CalcularOffsets(-angulo, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho()));
             }
+
+            foreach (Arista a in aristas) {
+                double offsetInicialMayor = Math.Max(a.getOffsetInicio()[0], a.getOffsetInicio()[a.getNumCanales() - 1]);
+                double offsetFinalMayor = Math.Max(a.getOffsetFinal()[0], a.getOffsetFinal()[a.getNumCanales() - 1]);
+                double[] inic = a.getOffsetInicio();
+                double[] fin = a.getOffsetFinal();
+
+                a.setInicio(Arista.moverPuntoConAngulo(a.getInicio(), a.getAngulo(), offsetInicialMayor));
+                a.setFinal(Arista.moverPuntoConAngulo(a.getFinal(),Arista.anguloContrario(a.getAngulo()),offsetFinalMayor));
+                a.setLongitud((a.getLongitud() - offsetInicialMayor) - offsetFinalMayor);
+
+                for (int i = 0; i < a.getNumCanales(); i++) {
+                    inic[i] -= offsetInicialMayor;
+                    fin[i] += offsetFinalMayor;
+                }
+
+                a.setOffsetInicio(inic);
+                a.setOffsetFinal(fin);
+            }
+
             List<List<Coordenada>[][]> pcb = new List<List<Coordenada>[][]>();
             foreach (Arista a in aristas)
             {
