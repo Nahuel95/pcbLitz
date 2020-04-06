@@ -163,33 +163,34 @@ namespace LitzGrafica
                     }
                 }
             }
-            //int offsetIndex = 0;
-            //foreach (List<Coordenada> i in salida[0])
-            //{
-            //    int sel = 2 * offsetIndex % a.getNumCanales();
-            //    //Console.WriteLine(sel);
-            //    if (sel % 2 == 0) {
-            //        //Console.WriteLine(a.getOffsetInicio()[sel]);
-            //        i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
-            //        //Console.WriteLine(a.getOffsetFinal()[sel]);
-            //        i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
-            //    }
-            //    offsetIndex++;
-            //}
-            //offsetIndex = 0;
-            //foreach (List<Coordenada> i in salida[1])
-            //{
-            //    int sel = 2 * offsetIndex % a.getNumCanales();
-            //    //Console.WriteLine(sel);
-            //    if (sel % 2 == 1)
-            //    {
-            //        //Console.WriteLine(a.getOffsetInicio()[sel]);
-            //        i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
-            //        //Console.WriteLine(a.getOffsetFinal()[sel]);
-            //        i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
-            //    }
-            //    offsetIndex++;
-            //}
+            int offsetIndex = 0;
+            foreach (List<Coordenada> i in salida[0])
+            {
+                int sel = 2 * offsetIndex % a.getNumCanales();
+                //Console.WriteLine(sel);
+                if (sel % 2 == 0)
+                {
+                    //Console.WriteLine(a.getOffsetInicio()[sel]);
+                    i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
+                    //Console.WriteLine(a.getOffsetFinal()[sel]);
+                    i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
+                }
+                offsetIndex++;
+            }
+            offsetIndex = 0;
+            foreach (List<Coordenada> i in salida[1])
+            {
+                int sel = 2 * offsetIndex % a.getNumCanales();
+                //Console.WriteLine(sel);
+                if (sel % 2 == 1)
+                {
+                    //Console.WriteLine(a.getOffsetInicio()[sel]);
+                    i[0].setY(i[0].getY() + a.getOffsetInicio()[sel]);
+                    //Console.WriteLine(a.getOffsetFinal()[sel]);
+                    i[i.Count - 1].setY(i[i.Count - 1].getY() + a.getOffsetFinal()[sel]);
+                }
+                offsetIndex++;
+            }
 
             foreach (List<Coordenada>[] i in salida)
             {

@@ -24,19 +24,24 @@ namespace LitzGrafica
             CambiarEscala cambiar = new CambiarEscala(sender);
             if (cambiar.ShowDialog() == DialogResult.OK)
             {
+                //Agregar codigo de error
+            }else
+            {
 
             }
         }
 
+        
         private void TransposeButton_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog file = new OpenFileDialog();
-            string path = "C:\\Gerber_TopLayer.GTL";
-            //if (file.ShowDialog() == DialogResult.OK)
-            //{
-            //    path = file.FileName;
-            //}
+            string path = "";
+            //string path = "C:\\Gerber_TopLayer.GTL";
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                path = file.FileName;
+            }
 
             //string path = Path.Combine("C:","Gerber_TopLayer.gtl");
             double size = Traductor.leerHerramienta(path);
@@ -51,9 +56,9 @@ namespace LitzGrafica
 
             for (int i = 0; i < aristas.Count - 1; i++)
             {
-                int angulo = Arista.anguloEntreAristas(aristas[i], aristas[i + 1]);
+                int angulo = Arista.anguloEntreAristas(aristas[i], aristas[i + 1])/2;
                 aristas[i].setOffsetFinal(Arista.CalcularOffsets(angulo, aristas[i].getNumCanales(), aristas[i].getAncho()));
-                aristas[i + 1].setOffsetInicio(Arista.CalcularOffsets(-angulo, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho()));
+                aristas[i + 1].setOffsetInicio(Arista.CalcularOffsets(angulo, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho()));
             }
 
             foreach (Arista a in aristas) {
@@ -65,12 +70,12 @@ namespace LitzGrafica
                 a.setInicio(Arista.moverPuntoConAngulo(a.getInicio(), a.getAngulo(), offsetInicialMayor));
                 a.setFinal(Arista.moverPuntoConAngulo(a.getFinal(),Arista.anguloContrario(a.getAngulo()),offsetFinalMayor));
                 a.setLongitud((a.getLongitud() - offsetInicialMayor) - offsetFinalMayor);
-
+                
                 for (int i = 0; i < a.getNumCanales(); i++) {
+                    
                     inic[i] -= offsetInicialMayor;
                     fin[i] += offsetFinalMayor;
                 }
-
                 a.setOffsetInicio(inic);
                 a.setOffsetFinal(fin);
             }
@@ -85,11 +90,11 @@ namespace LitzGrafica
             Random rnd = new Random();
             int seriesIndex = 0;
 
-            FileStream fsTop = new FileStream(Path.GetDirectoryName(path)+"\\LitzResult\\"+Path.GetFileNameWithoutExtension(path)+"_litz.gtl", FileMode.CreateNew);
+            FileStream fsTop = new FileStream(Path.GetDirectoryName(path)+"\\LitzResult\\"+Path.GetFileNameWithoutExtension(path)+"_litz.gtl", FileMode.Create, FileAccess.Write);
             System.IO.StreamWriter swTop = new StreamWriter(fsTop);
-            FileStream fsBot = new FileStream(Path.GetDirectoryName(path) + "\\LitzResult\\" + Path.GetFileNameWithoutExtension(path) + "_litz.gbl", FileMode.CreateNew);
+            FileStream fsBot = new FileStream(Path.GetDirectoryName(path) + "\\LitzResult\\" + Path.GetFileNameWithoutExtension(path) + "_litz.gbl", FileMode.Create, FileAccess.Write);
             System.IO.StreamWriter swBot = new StreamWriter(fsTop);
-
+            
             int capa = 0;
             foreach (List<Coordenada>[][] i in pcb)
             {
@@ -105,7 +110,7 @@ namespace LitzGrafica
                         actual = swBot;
                     }
 
-                    actual.WriteLine("G04 Layer: TopLayer *\nG04 LitzPCB por CBuzzio y NFilippa, {0}-{1} *\nG04 Scale: 100 percent, Rotated: No, Reflected: No *G04 Dimensiones en micrometros *G04 leading zeros omitted, absolute positions, 3 integer and 3 decimal *\n% FSLAX33Y33 *%\n% MOMM *%\nG90 *\nG71D02 *", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+                    actual.WriteLine("G04 Layer: TopLayer*\nG04 LitzPCB por CBuzzio y NFilippa, {0}-{1}*\nG04 Scale: 100 percent, Rotated: No, Reflected: No\n*G04 Dimensiones en micrometros*\nG04 leading zeros omitted, absolute positions, 3 integer and 3 decimal*\n% FSLAX33Y33 *%\n% MOMM *%\nG90*\nG71D02*", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
                     foreach (List<Coordenada> k in j)
                     {
                         chart1.Series.Add(seriesIndex.ToString());
@@ -121,14 +126,14 @@ namespace LitzGrafica
                                 int mostrar = 15;
                                 if (seriesIndex < mostrar)
                                 {
-                                    chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
-                                    Console.WriteLine(k[m].ToString());
+                                    chart1.Series[seriesIndex].Points.AddXY(Math.Floor(k[m].getX()), Math.Floor(k[m].getY()));
+                                    //Console.WriteLine(k[m].ToString());
                                     k[m].OrdenGerber(actual);
                                 }
                             }else
                             {
                                 chart1.Series[seriesIndex].Points.AddXY(k[m].getX(), k[m].getY());
-                                Console.WriteLine(k[m].ToString());
+                                //Console.WriteLine(k[m].ToString());
                                 k[m].OrdenGerber(actual);
                             }
                         }
@@ -138,9 +143,7 @@ namespace LitzGrafica
                     capa = 1;
                 }
             }
-
-            swTop.Close();
-            swBot.Close();
+            
             fsTop.Close();
             fsBot.Close();
         }

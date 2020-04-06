@@ -93,7 +93,7 @@ namespace LitzGrafica
 
         public void OrdenGerber(System.IO.StreamWriter archivo)
         {
-            archivo.WriteLine("G01X{0}Y{1}D0{2}*", this.x, this.y, Obturador ? 2 : 1);
+            archivo.WriteLine("G01X{0}Y{1}D0{2}*", (int)Math.Floor(this.x), (int)Math.Floor(this.y), Obturador ? 2 : 1);
         }
     }
 }

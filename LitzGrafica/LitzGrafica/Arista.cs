@@ -170,7 +170,7 @@ namespace LitzGrafica
             return ret;
         }
 
-        private string printOffset(double[] offset) {
+        public static string printOffset(double[] offset) {
             string ret= "";
             foreach(double o in offset) {
                 ret = ret + (o + " .. ");

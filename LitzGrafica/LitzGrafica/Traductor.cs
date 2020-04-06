@@ -47,7 +47,7 @@ namespace LitzGrafica
             char[] sizeBreak = { ',', '*' };
             partes = lines[i].Split(sizeBreak);
             double size = double.Parse(partes[1].Replace('.',','));
-            Console.WriteLine("ANCHO" + partes[1]);
+            //Console.WriteLine("ANCHO" + partes[1]);
             return size;
         }
 
@@ -64,7 +64,7 @@ namespace LitzGrafica
 
             for (int i = j; i <= lines.Length - 1; i++) {
                 if (lines[i].Contains("D01") || lines[i].Contains("D02")){
-                    Console.WriteLine(i + "- " + lines[i]);
+                    //Console.WriteLine(i + "- " + lines[i]);
                     ret.Add(RenglonACoordenada(lines[i]));
                 }
             }
