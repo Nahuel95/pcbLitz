@@ -17,14 +17,14 @@ namespace LitzGrafica
                 Arista aux = new Arista(lista[i], lista[i + 1], numCanales);
                 ret.Add(aux);
             }
-            for (int i = 0; i < ret.Count() - 1; i++){
+            /*for (int i = 0; i < ret.Count() - 1; i++){
                 double[] offset = Arista.CalcularOffsets(Arista.anguloEntreAristas(ret[i], ret[i + 1]), ret[i].getNumCanales(), ret[i].getAncho());
                 ret[i].setOffsetFinal(offset);
                 for (int j = 0; j < offset.Length; j++){
                     offset[j] = -offset[j];
                 }
                 ret[i + 1].setOffsetInicio(offset);
-            }
+            }*/
                 return ret;
         }
 

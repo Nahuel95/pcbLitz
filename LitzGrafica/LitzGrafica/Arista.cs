@@ -118,25 +118,19 @@ namespace LitzGrafica
             return (numCanales * anchoCanales) + ((numCanales - 1) * espaciado);
         }
         public static int anguloEntreAristas(Arista a, Arista b){
-            int aux = 8 - a.angulo;
-            int ang = b.angulo + aux;
-            int ret = 0;
-            ang = ang % 8;
-            if (ang >= 4)
-            {
-                ret = ang - 4;
+            int ret = b.angulo - a.angulo;
+            if (ret < 0) {
+                ret += 8; 
             }
-            else {
-                ret = ang + 4;
-            }
+            //Console.WriteLine(ret);
             return ret;
         }
 
         public static Coordenada moverPuntoConAngulo(Coordenada punto, int direcc, double distancia){
             double nuevaX;
             double nuevaY;
-            nuevaX = punto.getX() + distancia * Math.Cos(gradosARadianes(direcc*45));
-            nuevaY = punto.getY() + distancia * Math.Sin(gradosARadianes(direcc*45));
+            nuevaX = punto.getX() + (distancia * Math.Cos(gradosARadianes(direcc*45)));
+            nuevaY = punto.getY() + (distancia * Math.Sin(gradosARadianes(direcc*45)));
             return new Coordenada(nuevaX, nuevaY, punto.getObturador());
         }
 
@@ -153,6 +147,7 @@ namespace LitzGrafica
         public static double[] CalcularOffsets(int angulo, int canales, double ancho){ //angulo <- {1, 2, 6, 7}
             double[] ret = new double[canales];
             double anchoCanal = ancho / canales;
+        
             if (angulo == 6)
             {
                 angulo = -2;
@@ -160,13 +155,14 @@ namespace LitzGrafica
             else if (angulo == 7) {
                 angulo = -1;
             }
+            //Console.WriteLine(angulo);
 
             double canalesAux = Convert.ToDouble(canales);
             for (int i = 0; i < ret.Length; i++)
             {
-                ret[i] = Math.Tan(gradosARadianes(22.5 * angulo)) * anchoCanal * (((canalesAux - 1) / 2) - i) * Math.Sign(angulo);
+                ret[i] = Math.Tan(gradosARadianes(22.5 * angulo)) * anchoCanal * (i-((canalesAux -1) / 2));// * Math.Sign(angulo);
             }
-           
+            //Console.WriteLine(Arista.printOffset(ret));
             return ret;
         }
 

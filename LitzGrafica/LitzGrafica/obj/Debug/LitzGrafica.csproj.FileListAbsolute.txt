@@ -11,7 +11,6 @@ C:\Users\Nahuel F\Programas\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.pdb
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.exe.config
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.exe
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\bin\Debug\LitzGrafica.pdb
-C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csprojAssemblyReference.cache
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Main.resources
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Properties.Resources.resources
 C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csproj.GenerateResource.cache
@@ -27,3 +26,4 @@ D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGraf
 D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Main.resources
 D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.Properties.Resources.resources
 D:\Christian\Documents\GitHub\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csproj.GenerateResource.Cache
+C:\Users\Nahuel F\Programas\pcbLitz2\pcbLitz\LitzGrafica\LitzGrafica\obj\Debug\LitzGrafica.csprojAssemblyReference.cache

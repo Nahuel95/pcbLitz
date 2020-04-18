@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Permissions;
+
 
 
 namespace LitzGrafica
@@ -47,39 +49,35 @@ namespace LitzGrafica
             double size = Traductor.leerHerramienta(path);
             List<Coordenada> coords = Traductor.GerberACoordenadas(path);
             List<Arista> aristas = Traductor.CalcularAristas(coords, 5);
-
+            Console.WriteLine("Path: "+path);
             foreach (Arista a in aristas)
             {
-                a.setAncho(size*1000);
+                a.setAncho(1000);
                 //a.setAncho(10);
             }
 
             for (int i = 0; i < aristas.Count - 1; i++)
             {
-                int angulo = Arista.anguloEntreAristas(aristas[i], aristas[i + 1])/2;
-                aristas[i].setOffsetFinal(Arista.CalcularOffsets(angulo, aristas[i].getNumCanales(), aristas[i].getAncho()));
-                aristas[i + 1].setOffsetInicio(Arista.CalcularOffsets(angulo, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho()));
-            }
+                int angulo = Arista.anguloEntreAristas(aristas[i], aristas[i + 1]);
+                //aristas[i].setOffsetFinal(Arista.CalcularOffsets(angulo, aristas[i].getNumCanales(), aristas[i].getAncho()));
+                //aristas[i + 1].setOffsetInicio(Arista.CalcularOffsets(angulo2, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho()));
+                double[] offset = Arista.CalcularOffsets(angulo, aristas[i].getNumCanales(), aristas[i].getAncho());
+                //double[] offsetInicial = Arista.CalcularOffsets(angulo2, aristas[i + 1].getNumCanales(), aristas[i + 1].getAncho());
+                double offsetMayor = Math.Max(offset[0], offset[aristas[i].getNumCanales() - 1]);
 
-            foreach (Arista a in aristas) {
-                double offsetInicialMayor = Math.Max(a.getOffsetInicio()[0], a.getOffsetInicio()[a.getNumCanales() - 1]);
-                double offsetFinalMayor = Math.Max(a.getOffsetFinal()[0], a.getOffsetFinal()[a.getNumCanales() - 1]);
-                double[] inic = a.getOffsetInicio();
-                double[] fin = a.getOffsetFinal();
-
-                a.setInicio(Arista.moverPuntoConAngulo(a.getInicio(), a.getAngulo(), offsetInicialMayor));
-                a.setFinal(Arista.moverPuntoConAngulo(a.getFinal(),Arista.anguloContrario(a.getAngulo()),offsetFinalMayor));
-                a.setLongitud((a.getLongitud() - offsetInicialMayor) - offsetFinalMayor);
-                
-                for (int i = 0; i < a.getNumCanales(); i++) {
-                    
-                    inic[i] -= offsetInicialMayor;
-                    fin[i] += offsetFinalMayor;
+                for (int j = 0; j < aristas[i].getNumCanales(); j++)
+                {
+                    offset[j] += offsetMayor;
                 }
-                a.setOffsetInicio(inic);
-                a.setOffsetFinal(fin);
-            }
 
+                aristas[i].setOffsetFinal(offset);
+                aristas[i + 1].setOffsetInicio(offset);
+
+                Console.WriteLine("Inicio: " + Arista.printOffset(aristas[i].getOffsetInicio()));
+                Console.WriteLine("Final: " + Arista.printOffset(aristas[i].getOffsetFinal()));
+               
+            }
+            
             List<List<Coordenada>[][]> pcb = new List<List<Coordenada>[][]>();
             foreach (Arista a in aristas)
             {
@@ -89,10 +87,18 @@ namespace LitzGrafica
             }
             Random rnd = new Random();
             int seriesIndex = 0;
+            string gtlPath = Path.Combine(Path.GetDirectoryName(path), "LitzResult", Path.GetFileNameWithoutExtension(path) + "_litz.gtl");
+            string gblPath = Path.Combine(Path.GetDirectoryName(path), "LitzResult", Path.GetFileNameWithoutExtension(path) + "_litz.gbl");
+            FileIOPermission permisoTop = new FileIOPermission(FileIOPermissionAccess.Write, gblPath);
+            FileIOPermission permisoBot = new FileIOPermission(FileIOPermissionAccess.Write, gblPath);
 
-            FileStream fsTop = new FileStream(Path.GetDirectoryName(path)+"\\LitzResult\\"+Path.GetFileNameWithoutExtension(path)+"_litz.gtl", FileMode.Create, FileAccess.Write);
+            permisoTop.Demand();
+            permisoBot.Demand();
+
+            Directory.CreateDirectory(Path.Combine(Path.GetDirectoryName(path), "LitzResult"));
+            FileStream fsTop = new FileStream(gtlPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             System.IO.StreamWriter swTop = new StreamWriter(fsTop);
-            FileStream fsBot = new FileStream(Path.GetDirectoryName(path) + "\\LitzResult\\" + Path.GetFileNameWithoutExtension(path) + "_litz.gbl", FileMode.Create, FileAccess.Write);
+            FileStream fsBot = new FileStream(gblPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             System.IO.StreamWriter swBot = new StreamWriter(fsTop);
             
             int capa = 0;
@@ -123,7 +129,7 @@ namespace LitzGrafica
                         {
                             if (true)
                             {
-                                int mostrar = 15;
+                                int mostrar = 150;
                                 if (seriesIndex < mostrar)
                                 {
                                     chart1.Series[seriesIndex].Points.AddXY(Math.Floor(k[m].getX()), Math.Floor(k[m].getY()));
@@ -149,5 +155,6 @@ namespace LitzGrafica
         }
         
     }
+    
 }
 
